@@ -11,8 +11,7 @@ data.append(name)
 
 st.divider()
 
-def add_entry():
-    keyStr = str(time.time())
+def add_entry(keyStr:str):
     with st.container():
         entry = []
         col1, col2, col3 = st.columns(3)
@@ -31,9 +30,9 @@ def add_entry():
     
 
 
-add_entry()
+add_entry(str(time.time()))
 st.divider()
-add_entry()
+add_entry(str(time.time()))
 
 
 
