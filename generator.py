@@ -4,10 +4,12 @@ from io import StringIO
 import time
 
 days_mapping = {"Monday" : "M", "Tuesday" : "T", "Wednesday" : "W", "Thursday" : "R", "Friday" : "F"}
-data = []
 
 name = st.text_input("Name:")
-data.append(name)
+
+# Only add if name is not empty and not already in the list
+if name and name not in st.session_state['data']:
+    st.session_state['data'].append(name)
 
 st.divider()
 
@@ -26,19 +28,19 @@ def add_entry(keyStr:str):
         with col3:
             days = st.multiselect("Days of the Week:", ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], key = keyStr + "_days")
             entry.append(''.join([days_mapping[day] for day in days]))
-        data.append(entry)
+        st.session_state['data'].append(entry)
     
 
 
-add_entry(str(time.time()))
+add_entry("e1")
 st.divider()
-add_entry(str(time.time()))
+add_entry("e2")
 
 
 
 
 json_buffer = StringIO()
-json.dump(data, json_buffer)
+json.dump(st.session_state['data'], json_buffer)
 json_content = json_buffer.getvalue()
 st.divider()
 st.download_button('Download', json_content, file_name=f"{name}.json", mime='application/json')
