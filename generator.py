@@ -1,47 +1,131 @@
 import streamlit as st
+# from streamlit_extras.row import row
 import json
 from io import StringIO
 import time
+from verify import verify
+from functools import reduce
 
 days_mapping = {"Monday" : "M", "Tuesday" : "T", "Wednesday" : "W", "Thursday" : "R", "Friday" : "F"}
 
+# Initialize session state variables that track form state
+if 'name_initialized' not in st.session_state:
+    st.session_state['name_initialized'] = False
+if 'current_name' not in st.session_state:
+    st.session_state['current_name'] = ""
+
 name = st.text_input("Name:")
 
-# Only add if name is not empty and not already in the list
-if name and name not in st.session_state['data']:
-    st.session_state['data'].append(name)
+# Only update if name has actually changed
+if name != st.session_state['current_name']:
+    st.session_state['current_name'] = name
+    # Only add non-empty names to data
+    if name and name not in st.session_state['data']:
+        st.session_state['data'] = [name] + st.session_state['data']
+
+if 'num_entries' not in st.session_state:
+    st.session_state['num_entries'] = 1
+
+st.session_state['num_entries'] = st.number_input("Number of Entries", min_value=1, max_value=None, value=st.session_state['num_entries'])
 
 st.divider()
 
+
+
+# with st.form("my_form"):
+#     st.write("Inside the form")
+#     slider_val = st.slider("Form slider")
+#     checkbox_val = st.checkbox("Form checkbox")
+
+#     # Every form must have a submit button.
+#     submitted = st.form_submit_button("Submit")
+#     if submitted:
+#         st.write("slider", slider_val, "checkbox", checkbox_val)
+# st.write("Outside the form")
 def add_entry(keyStr:str):
-    with st.container():
-        entry = []
+    with st.form(key = keyStr + "_form"):
+        # entry = []
         col1, col2, col3 = st.columns(3)
         with col1:
             start_time = st.time_input("Start Time:", value = None, key = keyStr + "_start")
-            if start_time is not None:
-                entry.append([start_time.hour, start_time.minute])
         with col2:
             end_time = st.time_input("End Time:", value = None, key = keyStr + "_end")
-            if end_time is not None:
-                entry.append([end_time.hour, end_time.minute])
         with col3:
             days = st.multiselect("Days of the Week:", ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], key = keyStr + "_days")
-            entry.append(''.join([days_mapping[day] for day in days]))
-        st.session_state['data'].append(entry)
-    
+
+        
+        submitted = st.form_submit_button("Save")
+        if submitted:
+            # Build entry from form values
+            entry = []
+            if start_time is not None:
+                entry.append([start_time.hour, start_time.minute])
+            else:
+                st.error("Start time is required")
+                return
+            
+            if end_time is not None:
+                entry.append([end_time.hour, end_time.minute])
+            else:
+                st.error("End time is required")
+                return
+            
+            if days:
+                entry.append(''.join([days_mapping[day] for day in days]))
+            else:
+                st.error("At least one day must be selected")
+                return
+
+            # Ensure data list has proper structure with name at index 0
+            if not st.session_state['data']:
+                st.session_state['data'] = [""]
+            
+            entry_index = int(keyStr) + 1  # +1 because index 0 is the name
+            
+            # Ensure list is long enough
+            while len(st.session_state['data']) <= entry_index:
+                st.session_state['data'].append(None)
+            
+            # Save the entry
+            st.session_state['data'][entry_index] = entry
+            st.success("Saved!")
+    # st.divider()
 
 
-add_entry("e1")
+
+for i in range(st.session_state['num_entries']):
+    add_entry(str(i))
+
+
 st.divider()
-add_entry("e2")
 
-
-
+# Debug info to help diagnose session state issues
+with st.expander("Debug Info"):
+    st.write("Session state data:", st.session_state['data'])
+    st.write("Number of entries:", st.session_state['num_entries'])
 
 json_buffer = StringIO()
+st.session_state['data'] = [i for i in st.session_state['data'] if i != '']
+
+# # Verify the data before saving
+# errors, warnings = ([], [])
+# if len(st.session_state['data']) > 1:  # Only verify if there are entries beyond the name
+#     for entry in st.session_state['data'][1:]:
+#         if entry is not None:  # Skip None entries
+#             ers, warns = verify(entry)
+#             errors.append(ers)
+#             warnings.append(warns)
+
+# if errors:
+#     for error in errors:
+#         if error:  # Only display non-empty errors
+#             st.error(error)
+# if warnings:
+#     for warning in warnings:
+#         if warning:  # Only display non-empty warnings
+#             st.warning(warning)
+
 json.dump(st.session_state['data'], json_buffer)
 json_content = json_buffer.getvalue()
-st.divider()
 st.download_button('Download', json_content, file_name=f"{name}.json", mime='application/json')
 
