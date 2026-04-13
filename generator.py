@@ -2,9 +2,9 @@ import streamlit as st
 # from streamlit_extras.row import row
 import json
 from io import StringIO
-import time
-from verify import verify
-from functools import reduce
+# import time
+# from verify import verify
+# from functools import reduce
 
 days_mapping = {"Monday" : "M", "Tuesday" : "T", "Wednesday" : "W", "Thursday" : "R", "Friday" : "F"}
 
