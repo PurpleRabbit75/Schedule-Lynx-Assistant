@@ -3,12 +3,8 @@ This is my list of known bugs that I'm working on fixing. If you find another on
 
 # Bugs:
 
-When the user interacts with a time widget before the name widget, it messes up the writing to the person.json file
+None at this time :)
 
 # Features to be added:
-
-## Generator for person.json files
-
-## Download buttons for extant config.json and colors.json files
 
 ## Documentation
