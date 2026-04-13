@@ -1,10 +1,7 @@
 import streamlit as st
-# from streamlit_extras.row import row
 import json
 from io import StringIO
-# import time
-# from verify import verify
-# from functools import reduce
+
 
 days_mapping = {"Monday" : "M", "Tuesday" : "T", "Wednesday" : "W", "Thursday" : "R", "Friday" : "F"}
 
@@ -32,16 +29,6 @@ st.divider()
 
 
 
-# with st.form("my_form"):
-#     st.write("Inside the form")
-#     slider_val = st.slider("Form slider")
-#     checkbox_val = st.checkbox("Form checkbox")
-
-#     # Every form must have a submit button.
-#     submitted = st.form_submit_button("Submit")
-#     if submitted:
-#         st.write("slider", slider_val, "checkbox", checkbox_val)
-# st.write("Outside the form")
 def add_entry(keyStr:str):
     with st.form(key = keyStr + "_form"):
         # entry = []
@@ -89,7 +76,6 @@ def add_entry(keyStr:str):
             # Save the entry
             st.session_state['data'][entry_index] = entry
             st.success("Saved!")
-    # st.divider()
 
 
 
@@ -107,23 +93,6 @@ with st.expander("Debug Info"):
 json_buffer = StringIO()
 st.session_state['data'] = [i for i in st.session_state['data'] if i != '']
 
-# # Verify the data before saving
-# errors, warnings = ([], [])
-# if len(st.session_state['data']) > 1:  # Only verify if there are entries beyond the name
-#     for entry in st.session_state['data'][1:]:
-#         if entry is not None:  # Skip None entries
-#             ers, warns = verify(entry)
-#             errors.append(ers)
-#             warnings.append(warns)
-
-# if errors:
-#     for error in errors:
-#         if error:  # Only display non-empty errors
-#             st.error(error)
-# if warnings:
-#     for warning in warnings:
-#         if warning:  # Only display non-empty warnings
-#             st.warning(warning)
 
 json.dump(st.session_state['data'], json_buffer)
 json_content = json_buffer.getvalue()

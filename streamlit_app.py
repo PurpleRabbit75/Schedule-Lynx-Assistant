@@ -1,9 +1,5 @@
 import streamlit as st
-# import json
 
-# if ("config" not in st.session_state):
-#     with open('config/config.json', 'r') as file:
-#         st.session_state['config'] = json.load(file)
 if ("data" not in st.session_state):
     st.session_state['data'] = []
 
