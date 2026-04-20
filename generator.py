@@ -1,6 +1,7 @@
 import streamlit as st
 import json
 from io import StringIO
+from datetime import time
 
 
 days_mapping = {"Monday" : "M", "Tuesday" : "T", "Wednesday" : "W", "Thursday" : "R", "Friday" : "F"}
@@ -86,9 +87,8 @@ for i in range(st.session_state['num_entries']):
 st.divider()
 
 # Debug info to help diagnose session state issues
-with st.expander("Debug Info"):
-    st.write("Session state data:", st.session_state['data'])
-    st.write("Number of entries:", st.session_state['num_entries'])
+with st.expander("Preview File:"):
+    st.write(st.session_state['data'])
 
 json_buffer = StringIO()
 st.session_state['data'] = [i for i in st.session_state['data'] if i != '']
