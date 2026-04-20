@@ -21,7 +21,7 @@ To use this tool, perform the following steps. Perform numbered steps in the ord
 
 For example, if I have a class which occurs on Mondays and Wednesdays from 11:00 AM to 3:00 PM, I would write:
 
-![image](extras/input_example.png)
+![image](https://raw.githubusercontent.com/PurpleRabbit75/Schedule-Lynx-Assistant/refs/heads/main/extras/input_example.png)
 
 
 ## Common Issues
