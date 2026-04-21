@@ -8,6 +8,8 @@ This tool creates `person.json` files. A `person.json` file is a simple file tha
 
 ## How To Use This Tool
 
+If you aren't there already, navigate to [schedule-lynx-assistant.streamlit.app/](https://schedule-lynx-assistant.streamlit.app/). The remainder of these instructions refer to the interface located there[^1].
+
 To use this tool, perform the following steps. Perform numbered steps in the order listed, and bulleted steps in any order within their context.
 
 1. Write your name in the "Name" field. This name will be displayed on all schedules generated using this `person.json` file.
@@ -52,3 +54,7 @@ All of the above editors will display the "raw text" of the `person.json` file. 
 ### How can I create an event which doesn't start or stop on a 15-minute block?
 
 You can edit your downloaded `person.json` file using any text editor. See the [specification](https://github.com/PurpleRabbit75/person.json/blob/main/SPECIFICATION.md) for how to do this without breaking the format of your file.
+
+
+---
+[^1]: If you wish, you can also git clone this repo, `pip install streamlit`, navigate to inside the repo, and then run `streamlit run ./streamlit_app.py`. If you didn't understand a word of that, ignore it and use the web interface linked above.
