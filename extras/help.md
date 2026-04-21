@@ -4,7 +4,9 @@ Welcome to the Schedule Lynx Assistant Help page!
 
 ## What Is This Tool?
 
-This tool creates `person.json` files. A `person.json` file is a simple file that contains one person's weekly schedule. You can create a `person.json` file with this tool, download it, and text it to your friends. Then, you or your friends can upload up to 12 `person.json` files at a time to the [Schedule Lynx App](https://schedule-lynx.streamlit.app/), which will generate a side-by-side schedule containing the weekly availability of you and all your friends!
+[Schedule Lynx](https://schedule-lynx.streamlit.app/) is a tool that generates little downloadable schedules, which show your schedule side-by-side with your friends' schedules. Every person's schedule goes in a file called a `person.json` file. The idea is, you make a `person.json` file containing your own personal weekly schedule, and then you can text it to your friends. Then, someone can upload up to 12 files to Schedule Lynx, and text you all a side-by-side schedule containing the weekly availability of you and all your friends!
+
+<!-- This tool creates `person.json` files. A `person.json` file is a simple file that contains one person's weekly schedule. You can create a `person.json` file with this tool, download it, and text it to your friends. Then, you or your friends can upload up to 12 `person.json` files at a time to the [Schedule Lynx App](https://schedule-lynx.streamlit.app/), which will generate a side-by-side schedule containing the weekly availability of you and all your friends! -->
 
 ## How To Use This Tool
 
@@ -38,7 +40,7 @@ There are two common causes of this.
 
 ### How do I open a `person.json` file?
 
-Many, many apps can open `person.json` files, since they follow a widely used format. Here are a few:
+Many apps can open `person.json` files, since they follow a widely used format. Here are a few:
 
 - Notepad, Notepad++, TextEdit, BBEdit, and similar text editors
 - Microsoft Word, Microsoft Excel
@@ -48,7 +50,7 @@ Many, many apps can open `person.json` files, since they follow a widely used fo
 
 If you don't have any of these, try double-clicking on the file and seeing how your OS suggests you open it. `.json` files are really just specially formatted text, and opening it with an unsupported editor won't do it any harm.
 
-All of the above editors will display the "raw text" of the `person.json` file. The real use of `person.json` files, though, is to convert them into schedules that line up with the schedules of your friends! You can do this using [schedule-lynx.streamlit.app](https://schedule-lynx.streamlit.app) :)
+All of the above editors will display the "raw text" of the `person.json` file. The real use of `person.json` files, though, is to convert them into schedules that line up with the schedules of your friends! You can do this using [schedule-lynx.streamlit.app](https://schedule-lynx.streamlit.app).
 
 ### How can I create an event which doesn't start or stop on a 15-minute block?
 
