@@ -98,3 +98,5 @@ json.dump(st.session_state['data'], json_buffer)
 json_content = json_buffer.getvalue()
 st.download_button('Download', json_content, file_name=f"{name}.json", mime='application/json')
 
+st.caption("""Privacy Policy: We do not collect or store any information in way way whatsoever. 
+We never have and we never will.""")

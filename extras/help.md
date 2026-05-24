@@ -55,3 +55,9 @@ All of the above editors will display the "raw text" of the `person.json` file. 
 ### How can I create an event which doesn't start or stop on a 15-minute block?
 
 You can edit your downloaded `person.json` file using any text editor. See the [specification](https://github.com/PurpleRabbit75/person.json/blob/main/SPECIFICATION.md) for how to do this without breaking the format of your file.
+
+
+
+
+
+_
